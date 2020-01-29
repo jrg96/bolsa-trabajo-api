@@ -1,18 +1,19 @@
-package com.empresa2.api.model.response.usuario;
+package com.empresa2.api.model.response;
 
 import java.util.List;
 
 import org.springframework.hateoas.Links;
+import org.springframework.hateoas.PagedModel;
 
 import com.empresa2.api.entity.Usuario;
+import com.empresa2.api.model.UsuarioModel;
 
-public class ResponseUsuarioLista 
+public class CustomPagedResponse 
 {
 	private int httpStatus;
 	private int errNumber = -1;
 	private String errMessage = "";
-	private List<Usuario> usuarios;
-	private Links links;
+	private PagedModel<?> result;
 	
 	public int getHttpStatus() 
 	{
@@ -33,16 +34,6 @@ public class ResponseUsuarioLista
 	{
 		this.errMessage = errMessage;
 	}
-	
-	public List<Usuario> getUsuarios() 
-	{
-		return usuarios;
-	}
-	
-	public void setUsuarios(List<Usuario> usuarios) 
-	{
-		this.usuarios = usuarios;
-	}
 
 	public int getErrNumber() 
 	{
@@ -52,6 +43,16 @@ public class ResponseUsuarioLista
 	public void setErrNumber(int errNumber) 
 	{
 		this.errNumber = errNumber;
+	}
+
+	public PagedModel<?> getResult() 
+	{
+		return result;
+	}
+
+	public void setResult(PagedModel<?> result) 
+	{
+		this.result = result;
 	}
 	
 	
