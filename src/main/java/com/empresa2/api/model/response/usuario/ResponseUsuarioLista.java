@@ -7,8 +7,8 @@ import com.empresa2.api.entity.Usuario;
 public class ResponseUsuarioLista 
 {
 	private int httpStatus;
-	private int errNumber;
-	private String errMessage;
+	private int errNumber = -1;
+	private String errMessage = "";
 	private List<Usuario> usuarios;
 	
 	public int getHttpStatus() 
