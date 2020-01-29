@@ -2,8 +2,10 @@ package com.empresa2.api.model.exception;
 
 import java.util.Date;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,4 +33,15 @@ public class CustResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		
 		return new ResponseEntity(custom, HttpStatus.NOT_FOUND);
 	}
+
+	// Manejar las excepciones relacionadas con bindingError
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) 
+	{
+		CustomGenericException custom = new CustomGenericException(new Date(), "Construcción del modelo falló", ex.getBindingResult().toString());
+		
+		return new ResponseEntity(custom, HttpStatus.BAD_REQUEST);
+	}
+	
 }
