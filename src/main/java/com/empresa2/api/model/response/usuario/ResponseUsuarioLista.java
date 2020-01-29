@@ -2,6 +2,8 @@ package com.empresa2.api.model.response.usuario;
 
 import java.util.List;
 
+import org.springframework.hateoas.Links;
+
 import com.empresa2.api.entity.Usuario;
 
 public class ResponseUsuarioLista 
@@ -10,6 +12,7 @@ public class ResponseUsuarioLista
 	private int errNumber = -1;
 	private String errMessage = "";
 	private List<Usuario> usuarios;
+	private Links links;
 	
 	public int getHttpStatus() 
 	{

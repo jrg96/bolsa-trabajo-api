@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -69,12 +70,6 @@ public class UsuarioServiceJpa implements UserDetailsService, IUsuarioService
 	}
 
 	@Override
-	public List<Usuario> obtenerTodos() 
-	{
-		return this.usuarioRepository.findAll();
-	}
-
-	@Override
 	public void eliminarUsuario(int id) 
 	{
 		if (this.usuarioRepository.existsById(id))
@@ -84,17 +79,9 @@ public class UsuarioServiceJpa implements UserDetailsService, IUsuarioService
 	}
 
 	@Override
-	public Page<Usuario> buscarPagina(int page, int size, String attribute, String order) 
+	public Page<Usuario> buscarPagina(Pageable pageable) 
 	{
-		Sort sort = sort = Sort.by(attribute).ascending(); 
-		
-		if (order == "desc")
-		{
-			sort = Sort.by(attribute).descending();
-		}
-		
-		PageRequest pagina = PageRequest.of(page, size, sort);
-		Page<Usuario> usuarios = usuarioRepository.findAll(pagina);
+		Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
 		
 		return usuarios;
 	}
