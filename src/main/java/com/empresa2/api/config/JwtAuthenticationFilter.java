@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -15,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static com.empresa2.api.config.ConstantesJWT.HEADER_STRING;
 import static com.empresa2.api.config.ConstantesJWT.TOKEN_PREFIX;
@@ -33,6 +36,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private TokenProvider jwtTokenUtil;
     
+    private Collection<String> excludeUrlPatterns = new ArrayList<>();
+    private AntPathMatcher pathMatcher = new AntPathMatcher();
+    
+    /*public JwtAuthenticationFilter() 
+    {
+    	excludeUrlPatterns.add("/swagger-ui**");
+    	excludeUrlPatterns.add("/swagger-ui/**");
+    	excludeUrlPatterns.add("/api-docs/**");
+	}*/
 
     // Metodo que implementa el filtro
     @Override
@@ -92,4 +104,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         chain.doFilter(req, res);
     }
+    
+    /*@Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException 
+    {
+    	System.out.println("Estamos intentando filtrar la URL: " + request.getServletPath());
+    	boolean result = excludeUrlPatterns.stream()
+                		.anyMatch(p -> pathMatcher.match(p, request.getServletPath()));
+    	System.out.println("El resultado es: " + result);
+        return result;
+    }*/
 }

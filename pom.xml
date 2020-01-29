@@ -80,6 +80,14 @@
   			<groupId>com.fasterxml.jackson.dataformat</groupId>
   			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
+		
+		
+		<!-- OpenAPI 3.0 Documentation -->
+		<dependency>
+      		<groupId>org.springdoc</groupId>
+      		<artifactId>springdoc-openapi-ui</artifactId>
+      		<version>1.2.29</version>
+   		</dependency>
 	</dependencies>
 
 	<build>
