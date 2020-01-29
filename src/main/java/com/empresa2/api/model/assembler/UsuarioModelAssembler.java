@@ -28,7 +28,7 @@ public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<U
 		// Colocando el link de referencia a si mismo
 		usuarioModel.add(
 				linkTo(
-					methodOn(UsuarioController.class).obtenerUsuario(entity.getId())
+					methodOn(UsuarioController.class).obtenerUsuario(entity.getId(), null)
 				).withSelfRel());
 		
 		// Rellenando el modelo
