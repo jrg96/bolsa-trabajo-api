@@ -85,4 +85,18 @@ public class UsuarioServiceJpa implements UserDetailsService, IUsuarioService
 		
 		return usuarios;
 	}
+
+	@Override
+	public boolean usuarioYaExiste(Usuario usuario) 
+	{
+		// Obtenemos un usuario de la DB dado email o username
+		Usuario usuarioEmail = this.usuarioRepository.findByEmail(usuario.getEmail());
+		Usuario usuarioUsern = this.usuarioRepository.findByUsername(usuario.getUsername());
+		
+		if (usuarioEmail != null || usuarioUsern != null)
+		{
+			return true;
+		}
+		return false;
+	}
 }

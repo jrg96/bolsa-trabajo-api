@@ -8,4 +8,5 @@ import com.empresa2.api.entity.Usuario;
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Integer> 
 {
 	Usuario findByUsername(String username);
+	Usuario findByEmail(String email);
 }

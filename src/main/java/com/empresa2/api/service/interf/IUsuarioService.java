@@ -14,4 +14,5 @@ public interface IUsuarioService
 	public void eliminarUsuario(int id);
 	
 	public Page<Usuario> buscarPagina(Pageable pageable);
+	public boolean usuarioYaExiste(Usuario usuario);
 }
