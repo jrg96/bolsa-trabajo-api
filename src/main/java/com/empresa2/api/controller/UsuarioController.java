@@ -10,6 +10,7 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -151,7 +152,7 @@ public class UsuarioController
 		 * ---------------- ZONA DE VALIDACION DE DATOS ---------------------------------------
 		 * */
 		// Chequeamos si el usuario en cuestion siquiera se encuentra en la DB
-		if (usuario == null)
+		if (usuarioDB == null)
 		{
 			throw new CustomNotFoundException(
 					messageSource.getMessage("not.found.usuario.message", 
@@ -191,5 +192,35 @@ public class UsuarioController
 		);
 		
 		return ResponseEntity.ok(usuarioModel);
+	}
+	
+	/*
+	 * API Endpoint para eliminar a un usuario
+	 * */
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@DeleteMapping(value = "/delete/{id}")
+	public ResponseEntity<?> modificarUsuario(@PathVariable("id") int id)
+	{
+		Usuario usuario = this.usuarioService.obtenerUsuario(id);
+		/*
+		 * ---------------- ZONA DE VALIDACION DE DATOS ---------------------------------------
+		 * */
+		// Chequeamos si el usuario en cuestion siquiera se encuentra en la DB
+		if (usuario == null)
+		{
+			throw new CustomNotFoundException(
+					messageSource.getMessage("not.found.usuario.message", 
+							null, LocaleContextHolder.getLocale()) + id);
+		}
+		
+		
+		/*
+		 * ---------------- ZONA DE DESPLIEGUE DE DATOS ---------------------------------------
+		 * */
+		this.usuarioService.eliminarUsuario(id);
+		
+		
+		// Devolvemos vacio porque no hay nada que desplegar
+		return ResponseEntity.ok("");
 	}
 }

@@ -82,7 +82,6 @@
 		</dependency>
 		
 		
-		<!-- OpenAPI 3.0 Documentation -->
 		<dependency>
       		<groupId>org.springdoc</groupId>
       		<artifactId>springdoc-openapi-ui</artifactId>
