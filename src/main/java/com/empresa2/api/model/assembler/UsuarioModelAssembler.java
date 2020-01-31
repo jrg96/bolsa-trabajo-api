@@ -29,7 +29,8 @@ public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<U
 		usuarioModel.add(
 				linkTo(
 					methodOn(UsuarioController.class).obtenerUsuario(entity.getId())
-				).withSelfRel());
+				).withSelfRel()
+		);
 		
 		// Rellenando el modelo
 		usuarioModel.setId(entity.getId());

@@ -1,6 +1,7 @@
 package com.empresa2.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,5 +35,18 @@ public class PerfilServiceJpa implements IPerfilService
 	public Page<Perfil> buscarTodos(Pageable pageable) 
 	{
 		return this.perfilRepository.findAll(pageable);
+	}
+
+	@Override
+	public Perfil buscarPorId(int id) 
+	{
+		Optional<Perfil> perfil = this.perfilRepository.findById(id);
+		
+		if (perfil.isPresent())
+		{
+			return perfil.get();
+		}
+		
+		return null;
 	}
 }

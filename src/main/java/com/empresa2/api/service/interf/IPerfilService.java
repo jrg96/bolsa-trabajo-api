@@ -11,5 +11,6 @@ public interface IPerfilService
 {
 	public void guardar(Perfil perfil);
 	public Perfil buscarPorNombre(String nombre);
+	public Perfil buscarPorId(int id);
 	public Page<Perfil> buscarTodos(Pageable pageable);
 }
